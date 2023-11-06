@@ -1,6 +1,7 @@
 const express = require("express");
 const videoRouter = require("./routes/videoRoutes");
 const mongoose = require("mongoose");
+const authRouter = require("./routes/authRoutes");
 
 mongoose
   .connect(
@@ -14,6 +15,7 @@ const app = express();
 app.use(express.json());
 
 app.use(videoRouter);
+app.use(authRouter);
 
 app.listen(3000, myCallbackFunction);
 
