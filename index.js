@@ -2,6 +2,7 @@ const express = require("express");
 const videoRouter = require("./routes/videoRoutes");
 const mongoose = require("mongoose");
 const authRouter = require("./routes/authRoutes");
+const cors = require("cors");
 
 mongoose
   .connect(
@@ -13,6 +14,7 @@ mongoose
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.use(videoRouter);
 app.use(authRouter);
