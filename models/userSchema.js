@@ -11,8 +11,27 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  name: {
+  username: {
     type: String,
+  },
+  thumbnail: {
+    type: String,
+  },
+  videos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Video",
+    },
+  ],
+  likedVideos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Video",
+    },
+  ],
+  subscribers: {
+    type: Number,
+    default: 0,
   },
 });
 
