@@ -70,4 +70,11 @@ videoRouter.get("/like/:id", authMiddleware, async (req, res) => {
   }
 });
 
+videoRouter.post("/comment", async (req, res) => {
+  const data = req.body;
+  const comment = new Comment(data);
+  await comment.save();
+  res.send(comment);
+});
+
 module.exports = videoRouter;
