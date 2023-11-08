@@ -4,6 +4,7 @@ const authRouter = express.Router();
 
 const jwt = require("jsonwebtoken");
 const User = require("../models/userSchema");
+const authMiddleware = require("./authMiddleware");
 
 authRouter.post("/signup", async (req, res) => {
   const data = req.body;
@@ -42,6 +43,18 @@ authRouter.post("/login", async (req, res) => {
     res.send({
       authorized: false,
     });
+  }
+});
+
+authRouter.get("/profile", authMiddleware, async (req, res) => {
+  try {
+    const user = req.user;
+    const id = user.id;
+    const userData = await User.findById(id);
+    await userData.populate("videos");
+    res.send(userData);
+  } catch (error) {
+    res.send(error);
   }
 });
 
